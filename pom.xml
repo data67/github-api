@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.kohsuke</groupId>
   <artifactId>github-api</artifactId>
-  <version>1.117</version>
+  <version>6ack-1.117-1</version>
   <name>GitHub API for Java</name>
   <url>https://github-api.kohsuke.org/</url>
   <description>GitHub API for Java</description>
@@ -669,6 +669,21 @@
           </plugin>
         </plugins>
       </build>
+    </profile>
+    <profile>
+      <id>6ack-release</id>
+      <distributionManagement>
+        <repository>
+          <id>6ack</id>
+          <name>6ack Maven Release Repository</name>
+          <url>https://nexus.6ack.com/repository/maven-releases</url>
+        </repository>
+        <snapshotRepository>
+          <id>6ack</id>
+          <name>6ack Maven Snapshot Repository</name>
+          <url>https://nexus.6ack.com/repository/maven-snapshots</url>
+        </snapshotRepository>
+      </distributionManagement>
     </profile>
   </profiles>
   <reporting>

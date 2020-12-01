@@ -2053,6 +2053,27 @@ public class GHRepository extends GHObject {
                 .toIterable(GHInvitation[].class, item -> item.wrapUp(root));
     }
 
+    public void removeInvitations(GHInvitation... invitations) throws IOException {
+        removeInvitations(asList(invitations));
+    }
+
+    public void removeInvitations(Collection<GHInvitation> invitations) throws IOException {
+        modifyInvitations(invitations, "DELETE", null);
+    }
+
+    private void modifyInvitations(@NonNull Collection<GHInvitation> invitations,
+            @NonNull String method,
+            @CheckForNull GHOrganization.Permission permission) throws IOException {
+        Requester requester = root.createRequest().method(method);
+        if (permission != null) {
+            requester = requester.with("permission", permission).inBody();
+        }
+
+        for (GHInvitation invitation : new LinkedHashSet<>(invitations)) {
+            requester.withUrlPath(getApiTailUrl("invitations/" + invitation.getId())).send();
+        }
+    }
+
     /**
      * Lists all the subscribers (aka watchers.)
      * <p>

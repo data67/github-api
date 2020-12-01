@@ -18,7 +18,6 @@ import java.net.URL;
 public class GHInvitation extends GHObject {
     /* package almost final */ GitHub root;
 
-    private int id;
     private GHRepository repository;
     private GHUser invitee, inviter;
     private String permissions;
@@ -29,6 +28,14 @@ public class GHInvitation extends GHObject {
         return this;
     }
 
+    public GHUser getInvitee() {
+        return invitee;
+    }
+
+    public GHUser getInviter() {
+        return inviter;
+    }
+
     /**
      * Accept a repository invitation.
      *
@@ -36,7 +43,7 @@ public class GHInvitation extends GHObject {
      *             the io exception
      */
     public void accept() throws IOException {
-        root.createRequest().method("PATCH").withUrlPath("/user/repository_invitations/" + id).send();
+        root.createRequest().method("PATCH").withUrlPath("/user/repository_invitations/" + getId()).send();
     }
 
     /**
@@ -46,7 +53,7 @@ public class GHInvitation extends GHObject {
      *             the io exception
      */
     public void decline() throws IOException {
-        root.createRequest().method("DELETE").withUrlPath("/user/repository_invitations/" + id).send();
+        root.createRequest().method("DELETE").withUrlPath("/user/repository_invitations/" + getId()).send();
     }
 
     @Override
